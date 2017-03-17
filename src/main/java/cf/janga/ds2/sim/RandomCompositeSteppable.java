@@ -6,16 +6,18 @@ import java.util.Vector;
 
 /**
  * A <code>Selector</code> that selects steppables in a random way.
+ *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com)
  */
 public final class RandomCompositeSteppable extends CompositeSteppable {
 
     /**
      * Creates and initializes a new <code>RandomSelector</code>.
+     *
      * @param steppables Collection of steppables to be selected by this
-     *                selector.
+     *                   selector.
      */
-    public RandomCompositeSteppable(final Collection<Steppable> steppables) {
+    public RandomCompositeSteppable(Collection<Steppable> steppables) {
         super(steppables);
     }
 

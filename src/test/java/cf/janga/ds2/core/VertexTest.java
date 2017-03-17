@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class VertexTest {
 
     @Test
-    public void connectCreatesOneDirectionalEdge() throws GraphException {
+    public void shouldConnect() throws GraphException {
         Vertex source = new Vertex("1");
         Vertex destination = new Vertex("2");
 
@@ -24,7 +24,7 @@ public class VertexTest {
     }
 
     @Test
-    public void doesNotConnectTheSameVertex() {
+    public void shouldNotConnectTheSameVertex() {
         Vertex vertex1 = new Vertex("1");
         try {
             Edge edge = vertex1.connect(vertex1);

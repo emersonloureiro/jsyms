@@ -1,33 +1,35 @@
 package cf.janga.ds2.sim;
 
-import java.awt.*;
-
 /**
  * Holds all the information concerning a particular simulation.
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com)
  */
-public abstract class Simulation {
+public class Simulation {
 
-    /**
-     * Holds the description of this simulation.
-     */
-    private String description_;
+    private final String description_;
 
-    /**
-     * Holds the name of this simulation.
-     */
-    private String name_;
+    private final String name_;
+
+    private final CompositeSteppable steppable_;
+
+    private final FinishingCondition condition_;
+
+    private boolean stopRequested_;
 
     /**
      * Creates a new {@code Simulation} with the provided getName and getDescription.
      *
      * @param name        Name of this simulation.
      * @param description Description of this simulation.
+     * @param steppable   Responsible for stepping all elements of the simulation
      */
-    public Simulation(final String name, final String description) {
-        this.name_ = name;
-        this.description_ = description;
+    public Simulation(String name, String description, CompositeSteppable steppable, FinishingCondition condition) {
+        name_ = name;
+        description_ = description;
+        steppable_ = steppable;
+        condition_ = condition;
+        stopRequested_ = false;
     }
 
     /**
@@ -36,7 +38,7 @@ public abstract class Simulation {
      * @return String
      */
     public final String getName() {
-        return this.name_;
+        return name_;
     }
 
     /**
@@ -45,14 +47,30 @@ public abstract class Simulation {
      * @return String
      */
     public final String getDescription() {
-        return this.description_;
+        return description_;
+    }
+
+    public final void run() {
+        // Initializes the steppable of the simulation.
+        steppable_.start();
+        int iteration = 1;
+
+        while (!condition_.isSatisfied(new SimulationIteration(iteration)) && !stopRequested_) {
+            // ... and steps the steppable of the simulation.
+            steppable_.step();
+            iteration++;
+        }
+
+        // Signals the steppable of the simulation to stop or stop stepping its
+        // internal steppables, if that's the case.
+        steppable_.stop();
+        stopRequested_ = false;
     }
 
     /**
-     * Initializes this simulation.
-     *
-     * @return Steppable The object that is steppable and will be responsible
-     * for stepping the steppables of this simulation.
+     * Requests the simulation to be stopped.
      */
-    public abstract CompositeSteppable init();
+    public final void stop() {
+        stopRequested_ = true;
+    }
 }

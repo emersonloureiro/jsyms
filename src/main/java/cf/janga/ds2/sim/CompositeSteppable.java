@@ -9,29 +9,29 @@ import java.util.*;
 public abstract class CompositeSteppable implements Steppable {
 
     /** Collection of steppables to be selected by this selector. */
-    private List<Steppable> steppables_;
+    private final List<Steppable> steppables_;
 
     /**
      * Creates and initializes a new <code>CompositeSteppable</code>.
      * @param steppables Collection of steppables to be selected by this
      *                selector.
      */
-    public CompositeSteppable(final Collection<? extends Steppable> steppables) {
-        this.steppables_ = new LinkedList<Steppable>(steppables);
+    public CompositeSteppable(Collection<? extends Steppable> steppables) {
+        steppables_ = new LinkedList<Steppable>(steppables);
     }
 
     /**
      * Returns the collection of steppables to be selected by this selector.
      * @return A collection of Steppable objects.
      */
-    protected final Collection<Steppable> steppables() {
-        return this.steppables_;
+    protected Collection<Steppable> steppables() {
+        return steppables_;
     }
 
     @Override
-    public final void start() {
+    public void start() {
         // ... Iterate over all steppables...
-        for (Iterator<? extends Steppable> steppables = this.steppables_.iterator(); steppables.hasNext();) {
+        for (Iterator<? extends Steppable> steppables = steppables_.iterator(); steppables.hasNext();) {
             // ... and starts each of them.
             steppables.next().start();
         }
@@ -40,7 +40,7 @@ public abstract class CompositeSteppable implements Steppable {
     @Override
     public void stop() {
         // ... Iterate over all steppables...
-        for (Iterator<? extends Steppable> steppablesIterator = this.steppables_.iterator(); steppablesIterator.hasNext();) {
+        for (Iterator<? extends Steppable> steppablesIterator = steppables_.iterator(); steppablesIterator.hasNext();) {
             // ...stopping each of them.
             steppablesIterator.next().stop();
         }
