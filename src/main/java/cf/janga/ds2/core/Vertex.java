@@ -1,6 +1,5 @@
 package cf.janga.ds2.core;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,44 +13,37 @@ public class Vertex extends GraphElementImpl {
     /**
      * Holds the edges connected to this vertex.
      */
-    private List<Edge> edges_;
+    private final List<Edge> edges_;
 
     /**
      * Creates a new {@link Vertex}.
      *
      * @param name Name of this {@link Vertex}.
      */
-    public Vertex(final String name) {
+    public Vertex(String name) {
         super(name);
         this.edges_ = new LinkedList<Edge>();
     }
 
     /**
-     * Returns the edges of this vertex.
+     * Connects this vertex with the one provided, and assumes that this
+     * vertex is the source and the one given the destination.
      *
-     * @return a {@link Collection} of {@link Edge} objects.
+     * @param destination The destination vertex to connect to this one
+     * @return
+     * @throws GraphException If the vertex provided is the same as this one
      */
-    public final List<Edge> getEdges() {
-        return this.edges_;
-    }
-
-    /**
-     * Adds an edge to this vertex.
-     *
-     * @param edge Edge to be added.
-     */
-    final void addEdge(final Edge edge) {
-        if (!this.edges_.contains(edge)) {
-            this.edges_.add(edge);
+    public Edge connect(Vertex destination) throws GraphException {
+        if (destination == this) {
+            throw new GraphException("Vertices cannot be the same");
         }
+        String edgeName = getName() + "-" + destination.getName();
+        Edge newEdge = new Edge(edgeName, this, destination);
+        edges_.add(newEdge);
+        return newEdge;
     }
 
-    /**
-     * Removes the provided from this vertex.
-     *
-     * @param edge The edge to be removed.
-     */
-    public final void removeEdge(final Edge edge) {
-        this.edges_.remove(edge);
+    List<Edge> getEdges() {
+        return edges_;
     }
 }
