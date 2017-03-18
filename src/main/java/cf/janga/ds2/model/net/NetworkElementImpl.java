@@ -1,11 +1,11 @@
-package cf.janga.ds2.core;
+package cf.janga.ds2.model.net;
 
 /**
- * Default basic implementation of a GraphElement.
+ * Default basic implementation of a {@link NetworkElement}.
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com)
  */
-public class GraphElementImpl implements GraphElement {
+public class NetworkElementImpl implements NetworkElement {
 
     /**
      * Name of this element.
@@ -13,11 +13,11 @@ public class GraphElementImpl implements GraphElement {
     private final String name_;
 
     /**
-     * Creates a new <code>GraphElementImpl</code>.
+     * Creates a new <code>NetworkElementImpl</code>.
      *
      * @param name Name of this element.
      */
-    public GraphElementImpl(String name) {
+    public NetworkElementImpl(String name) {
         this.name_ = name;
     }
 

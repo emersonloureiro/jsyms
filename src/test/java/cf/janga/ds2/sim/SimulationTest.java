@@ -15,12 +15,12 @@ public class SimulationTest {
         simulation.run();
 
         // Should've started the steppable
-        Mockito.verify(steppable).start();
+        Mockito.verify(steppable, Mockito.times(1)).start();
 
         // Should've stopped the steppable
-        Mockito.verify(steppable).stop();
+        Mockito.verify(steppable, Mockito.times(1)).stop();
 
-        // Should've ended when condition once true
+        // Should've ended once condition is true
         Mockito.verify(steppable, Mockito.times(iterations)).step();
     }
 }
