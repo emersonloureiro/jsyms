@@ -4,7 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * A <code>Selector</code> that selects steppables sequentially from a list.
+ * A {@link CompositeSteppable} which steps each steppable in the same order
+ * every time.
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com)
  */
@@ -13,8 +14,7 @@ public final class SequentialCompositeSteppable extends CompositeSteppable {
     /**
      * Creates and initializes a new <code>SequentialCompositeSteppable</code>.
      *
-     * @param steppables Collection of steppables to be selected by this
-     *                   selector.
+     * @param steppables Collection of steppables to be stepped
      */
     public SequentialCompositeSteppable(Collection<? extends Steppable> steppables) {
         super(steppables);
