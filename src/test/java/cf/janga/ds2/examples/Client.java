@@ -1,5 +1,6 @@
 package cf.janga.ds2.examples;
 
+import cf.janga.ds2.ext.backend.LoadBalancer;
 import cf.janga.ds2.sim.Steppable;
 
 public class Client implements Steppable {
@@ -23,7 +24,7 @@ public class Client implements Steppable {
     public void step() {
         if (Math.random() < requestChance_) {
             System.out.println("Client issued request...");
-            loadBalancer_.doRequest();
+            loadBalancer_.doRequest(new SimpleRequest());
         }
     }
 
