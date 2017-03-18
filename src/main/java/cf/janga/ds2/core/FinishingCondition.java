@@ -1,4 +1,4 @@
-package cf.janga.ds2.sim;
+package cf.janga.ds2.core;
 
 /**
  * A finishing condition for a simulation.

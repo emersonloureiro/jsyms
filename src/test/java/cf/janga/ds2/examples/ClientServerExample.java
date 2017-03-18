@@ -2,7 +2,7 @@ package cf.janga.ds2.examples;
 
 import cf.janga.ds2.ext.backend.LoadBalancer;
 import cf.janga.ds2.ext.backend.ServiceInstance;
-import cf.janga.ds2.sim.*;
+import cf.janga.ds2.core.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +11,9 @@ public class ClientServerExample {
 
     public static void main(String args[]) {
         ServiceInstance instances[] = new ServiceInstance[3];
-        instances[0] = new ExampleServiceInstance();
-        instances[1] = new ExampleServiceInstance();
-        instances[2] = new ExampleServiceInstance();
+        instances[0] = new SimpleServiceInstance();
+        instances[1] = new SimpleServiceInstance();
+        instances[2] = new SimpleServiceInstance();
         LoadBalancer loadBalancer = new LoadBalancer(instances);
         Client client = new Client(0.5f, loadBalancer);
 

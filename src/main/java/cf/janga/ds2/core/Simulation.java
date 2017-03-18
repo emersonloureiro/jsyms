@@ -1,4 +1,4 @@
-package cf.janga.ds2.sim;
+package cf.janga.ds2.core;
 
 /**
  * Holds all the information concerning a particular simulation.

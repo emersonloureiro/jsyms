@@ -1,7 +1,7 @@
 package cf.janga.ds2.examples;
 
 import cf.janga.ds2.ext.backend.LoadBalancer;
-import cf.janga.ds2.sim.Steppable;
+import cf.janga.ds2.core.Steppable;
 
 public class Client implements Steppable {
 

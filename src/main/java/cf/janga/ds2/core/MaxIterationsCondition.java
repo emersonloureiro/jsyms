@@ -1,4 +1,4 @@
-package cf.janga.ds2.sim;
+package cf.janga.ds2.core;
 
 /**
  * An {@link FinishingCondition} which is based on the number of iterations during which the

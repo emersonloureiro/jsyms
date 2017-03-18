@@ -8,7 +8,7 @@ import cf.janga.ds2.ext.backend.ServiceInstance;
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com).
  */
-public class ExampleServiceInstance extends ServiceInstance {
+public class SimpleServiceInstance extends ServiceInstance {
 
     @Override
     protected void processRequest(Request request) {

@@ -1,6 +1,6 @@
 package cf.janga.ds2.ext.backend;
 
-import cf.janga.ds2.sim.Steppable;
+import cf.janga.ds2.core.Steppable;
 
 import java.util.LinkedList;
 import java.util.Queue;

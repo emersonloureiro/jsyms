@@ -1,4 +1,4 @@
-package cf.janga.ds2.sim;
+package cf.janga.ds2.core;
 
 /**
  * Anything that can be stepped, that is, receive step events frequently, when
