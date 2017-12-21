@@ -1,4 +1,4 @@
-package cf.janga.ds2.examples;
+package cf.janga.ds2.examples.clientserver;
 
 import cf.janga.ds2.ext.backend.LoadBalancer;
 import cf.janga.ds2.core.Steppable;
