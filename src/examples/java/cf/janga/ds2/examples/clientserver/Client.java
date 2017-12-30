@@ -1,9 +1,12 @@
 package cf.janga.ds2.examples.clientserver;
 
-import cf.janga.ds2.ext.backend.LoadBalancer;
 import cf.janga.ds2.core.Steppable;
+import cf.janga.ds2.ext.backend.LoadBalancer;
+import cf.janga.ds2.messaging.BaseMessage;
+import cf.janga.ds2.messaging.Message;
+import cf.janga.ds2.messaging.Messageable;
 
-public class Client implements Steppable {
+public class Client implements Steppable, Messageable {
 
     private final float requestChance_;
     private final LoadBalancer loadBalancer_;
@@ -24,11 +27,15 @@ public class Client implements Steppable {
     public void step() {
         if (Math.random() < requestChance_) {
             System.out.println("Client issued request...");
-            loadBalancer_.doRequest(new SimpleRequest());
+            loadBalancer_.doMessage(new BaseMessage(this));
         }
     }
 
     @Override
     public void stop() {
+    }
+
+    @Override
+    public void doMessage(Message message) {
     }
 }

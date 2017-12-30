@@ -1,6 +1,8 @@
 package cf.janga.ds2.ext.backend;
 
 import cf.janga.ds2.core.Steppable;
+import cf.janga.ds2.messaging.Message;
+import cf.janga.ds2.messaging.Messageable;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,20 +13,20 @@ import java.util.Queue;
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com).
  */
-public class LoadBalancer implements Requestable, Steppable {
+public class LoadBalancer implements Messageable, Steppable {
 
-    private final Requestable instances_[];
+    private final Messageable instances_[];
 
     private int currentInstance_;
 
-    private Queue<Request> requestQueue_;
+    private Queue<Message> requestQueue_;
 
     /**
      * Creates a new <code>LoadBalancer</code>
      *
      * @param instances The instances behind the load balancer.
      */
-    public LoadBalancer(Requestable instances[]) {
+    public LoadBalancer(Messageable instances[]) {
         instances_ = instances;
     }
 
@@ -40,8 +42,8 @@ public class LoadBalancer implements Requestable, Steppable {
             if (currentInstance_ == instances_.length) {
                 currentInstance_ = 0;
             }
-            Request request = requestQueue_.poll();
-            instances_[currentInstance_].doRequest(request);
+            Message request = requestQueue_.poll();
+            instances_[currentInstance_].doMessage(request);
             currentInstance_++;
         }
     }
@@ -51,7 +53,7 @@ public class LoadBalancer implements Requestable, Steppable {
     }
 
     @Override
-    public void doRequest(Request request) {
-        requestQueue_.add(request);
+    public void doMessage(Message message) {
+        requestQueue_.add(message);
     }
 }

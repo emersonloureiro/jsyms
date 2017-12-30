@@ -1,6 +1,6 @@
 package cf.janga.ds2.examples.clientserver;
 
-import cf.janga.ds2.ext.backend.Request;
+import cf.janga.ds2.messaging.Message;
 import cf.janga.ds2.ext.backend.ServiceInstance;
 
 /**
@@ -11,7 +11,7 @@ import cf.janga.ds2.ext.backend.ServiceInstance;
 public class SimpleServiceInstance extends ServiceInstance {
 
     @Override
-    protected void processRequest(Request request) {
-        System.out.println("Processed request " + request.getId());
+    protected void processMessage(Message message) {
+        System.out.println("Processed request " + message.getId());
     }
 }

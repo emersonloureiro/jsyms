@@ -1,6 +1,8 @@
 package cf.janga.ds2.ext.backend;
 
 import cf.janga.ds2.core.Steppable;
+import cf.janga.ds2.messaging.Message;
+import cf.janga.ds2.messaging.Messageable;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,37 +12,48 @@ import java.util.Queue;
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com)
  */
-public abstract class ServiceInstance implements Requestable, Steppable {
+public abstract class ServiceInstance implements Messageable, Steppable {
 
-    private Queue<Request> requestQueue_;
+    private final Queue<Message> messageQueue_;
 
     /**
      * creates a new <code>ServiceInstance</code>.
      */
     public ServiceInstance() {
-        requestQueue_ = new LinkedList<>();
+        messageQueue_ = new LinkedList<>();
     }
 
     @Override
     public void start() {
-        requestQueue_ = new LinkedList<>();
+        messageQueue_.clear();
     }
 
     @Override
     public void step() {
-        if (requestQueue_.peek() != null) {
-            Request request = requestQueue_.poll();
-            processRequest(request);
+        if (messageQueue_.peek() != null) {
+            Message request = messageQueue_.poll();
+            processMessage(request);
         }
     }
-
-    protected abstract void processRequest(Request request);
 
     @Override
     public void stop() {
     }
 
-    public void doRequest(Request request) {
-        requestQueue_.add(request);
+    /**
+     * Performs the processing of the provided message.
+     *
+     * @param message The message to be processed.
+     */
+    protected abstract void processMessage(Message message);
+
+    /**
+     * Requests this service instance to process the provided
+     * message.
+     *
+     * @param message Message to be processed
+     */
+    public final void doMessage(Message message) {
+        messageQueue_.add(message);
     }
 }
