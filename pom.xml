@@ -7,10 +7,10 @@
         <version>7</version>
     </parent>
     <groupId>cf.janga</groupId>
-    <artifactId>ds2</artifactId>
+    <artifactId>jsyms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>ds2</name>
+    <name>jsyms</name>
     <description>Systems simulation SDK</description>
     <licenses>
         <license>
@@ -27,9 +27,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git@github.com:emersonloureiro/ds2.git</connection>
-        <developerConnection>scm:git:git@github.com:emersonloureiro/ds2.git</developerConnection>
-        <url>git@github.com:emersonloureiro/ds2.git</url>
+        <connection>scm:git:git@github.com:emersonloureiro/jsyms.git</connection>
+        <developerConnection>scm:git:git@github.com:emersonloureiro/jsyms.git</developerConnection>
+        <url>git@github.com:emersonloureiro/jsyms.git</url>
     </scm>
     <dependencies>
         <dependency>

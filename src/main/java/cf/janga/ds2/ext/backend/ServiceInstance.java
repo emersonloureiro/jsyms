@@ -1,6 +1,6 @@
 package cf.janga.ds2.ext.backend;
 
-import cf.janga.ds2.core.Steppable;
+import cf.janga.jsyms.core.Steppable;
 import cf.janga.ds2.messaging.Message;
 import cf.janga.ds2.messaging.Messageable;
 
