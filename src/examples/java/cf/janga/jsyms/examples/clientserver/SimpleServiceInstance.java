@@ -1,7 +1,7 @@
 package cf.janga.jsyms.examples.clientserver;
 
-import cf.janga.ds2.messaging.Message;
-import cf.janga.ds2.ext.backend.ServiceInstance;
+import cf.janga.jsyms.messaging.Message;
+import cf.janga.jsyms.ext.backend.ServiceInstance;
 
 /**
  * Simple service instance for client/service example.

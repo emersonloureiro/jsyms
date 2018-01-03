@@ -1,7 +1,7 @@
 package cf.janga.jsyms.examples.clientserver;
 
-import cf.janga.ds2.ext.backend.LoadBalancer;
-import cf.janga.ds2.ext.backend.ServiceInstance;
+import cf.janga.jsyms.ext.backend.LoadBalancer;
+import cf.janga.jsyms.ext.backend.ServiceInstance;
 import cf.janga.ds2.core.*;
 import cf.janga.jsyms.core.*;
 

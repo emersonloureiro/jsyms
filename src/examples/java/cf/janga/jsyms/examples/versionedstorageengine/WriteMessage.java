@@ -1,7 +1,7 @@
 package cf.janga.jsyms.examples.versionedstorageengine;
 
-import cf.janga.ds2.messaging.BaseMessage;
-import cf.janga.ds2.messaging.Messageable;
+import cf.janga.jsyms.messaging.BaseMessage;
+import cf.janga.jsyms.messaging.Messageable;
 
 /**
  * A message for writing items to the persistent store.

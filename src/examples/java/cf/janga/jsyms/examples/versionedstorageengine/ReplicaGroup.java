@@ -1,7 +1,7 @@
 package cf.janga.jsyms.examples.versionedstorageengine;
 
-import cf.janga.ds2.ext.backend.ServiceInstance;
-import cf.janga.ds2.messaging.Message;
+import cf.janga.jsyms.ext.backend.ServiceInstance;
+import cf.janga.jsyms.messaging.Message;
 
 import java.util.HashMap;
 import java.util.List;

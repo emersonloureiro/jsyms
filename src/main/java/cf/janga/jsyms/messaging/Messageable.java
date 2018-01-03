@@ -1,4 +1,4 @@
-package cf.janga.ds2.messaging;
+package cf.janga.jsyms.messaging;
 
 /**
  * An entity that can receive messages from another entity.

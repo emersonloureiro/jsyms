@@ -1,8 +1,8 @@
-package cf.janga.ds2.ext.backend;
+package cf.janga.jsyms.ext.backend;
 
 import cf.janga.jsyms.core.Steppable;
-import cf.janga.ds2.messaging.Message;
-import cf.janga.ds2.messaging.Messageable;
+import cf.janga.jsyms.messaging.Message;
+import cf.janga.jsyms.messaging.Messageable;
 
 import java.util.LinkedList;
 import java.util.Queue;

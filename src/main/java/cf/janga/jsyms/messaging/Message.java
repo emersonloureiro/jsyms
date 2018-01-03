@@ -1,4 +1,4 @@
-package cf.janga.ds2.messaging;
+package cf.janga.jsyms.messaging;
 
 /**
  * A message that can be exchanged between two parties.

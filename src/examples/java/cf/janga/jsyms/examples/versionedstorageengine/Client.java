@@ -1,8 +1,8 @@
 package cf.janga.jsyms.examples.versionedstorageengine;
 
 import cf.janga.jsyms.core.Steppable;
-import cf.janga.ds2.messaging.Message;
-import cf.janga.ds2.messaging.Messageable;
+import cf.janga.jsyms.messaging.Message;
+import cf.janga.jsyms.messaging.Messageable;
 
 /**
  * A client that can issue reads and writes to a
