@@ -1,6 +1,5 @@
 package cf.janga.jsyms.examples.versionedstorageengine;
 
-import cf.janga.ds2.core.*;
 import cf.janga.jsyms.core.*;
 
 import java.util.LinkedList;
