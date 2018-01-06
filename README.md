@@ -2,15 +2,17 @@
 
 A Java-based systems simulation SDK. What does it mean? It means it provides the basic framework to simulate computer systems - concurrent, distributed, etc - executing over time. It's a slimmed down version of the same framework I've built and used as part of my PhD work - where I used it to simulate the convergence properties of a class of decentralized systems.
 
-To get started, add the following dependency to your project.
+To get started, add the following dependency to your project, if you're using Maven.
 
-```
+```xml
 <dependency>
 	<groupId>cf.janga</groupId>
 	<artifactId>jsyms</artifactId>
 	<version>0.0.2</version>
 </dependency>
 ```
+
+Alternatively, download the latest release directly from https://github.com/emersonloureiro/jsyms/releases.
 
 # Basics
 
@@ -22,7 +24,7 @@ To illustrate the process of defining and running a simulation from scratch, a w
 
 First you need to think about the entities you'd want to have in the system to be simulated. At the very least, you'll implement those entities by implementing the `Steppable` interface. For the Dining Philosophers problem, the only entity is the `Philosopher`, so its code would look something like this:
 
-```
+```java
 public class Philosopher implements Steppable {
 
     private final Fork leftFork_;
@@ -99,7 +101,7 @@ Next comes setting up and running the simulation - see the code snipped below. T
 
 The simulation will run for as long as determined by the conditions object provided. In this example, a `MaxIterationsCondition` is being used, which will run the simulation for a maximum number of iterations. `FinishingCondition` is the actual type that defines the condition, but only the `MaxIterationsCondition` is provided so far. You can implement different conditions to suit your needs though.
 
-```
+```java
 public class DiningPhilosophersExample {
 
     public static void main(String[] args) {
@@ -130,7 +132,7 @@ public class DiningPhilosophersExample {
 
 For completeness, the code for the `Fork` class is also included below.
 
-```
+```java
 public class Fork {
 
     private Optional<Philosopher> heldBy_;
