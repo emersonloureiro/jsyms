@@ -1,6 +1,6 @@
 package cf.janga.jsyms.examples.versionedstorageengine;
 
-import cf.janga.jsyms.ext.backend.ServiceInstance;
+import cf.janga.jsyms.core.FifoQueueMessageable;
 import cf.janga.jsyms.messaging.Message;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com).
  */
-public class ReplicaGroup extends ServiceInstance {
+public class ReplicaGroup extends FifoQueueMessageable {
 
     private final List<StorageNode> storageNodes_;
     private final HashMap<String, PendingRequest> pendingRequests_;

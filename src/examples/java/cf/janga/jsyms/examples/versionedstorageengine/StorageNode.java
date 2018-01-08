@@ -1,6 +1,6 @@
 package cf.janga.jsyms.examples.versionedstorageengine;
 
-import cf.janga.jsyms.ext.backend.ServiceInstance;
+import cf.janga.jsyms.core.FifoQueueMessageable;
 import cf.janga.jsyms.messaging.Message;
 
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.HashMap;
  *
  * @author Emerson Loureiro (emerson.loureiro@gmail.com).
  */
-public class StorageNode extends ServiceInstance {
+public class StorageNode extends FifoQueueMessageable {
 
     private HashMap<String, Item> persistentStore_;
 
