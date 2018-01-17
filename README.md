@@ -8,7 +8,7 @@ To get started, add the following dependency to your project, if you're using Ma
 <dependency>
 	<groupId>cf.janga</groupId>
 	<artifactId>jsyms</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 </dependency>
 ```
 
