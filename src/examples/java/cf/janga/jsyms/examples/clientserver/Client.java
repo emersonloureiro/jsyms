@@ -1,8 +1,6 @@
 package cf.janga.jsyms.examples.clientserver;
 
 import cf.janga.jsyms.core.Steppable;
-import cf.janga.jsyms.ext.backend.LoadBalancer;
-import cf.janga.jsyms.messaging.BaseMessage;
 import cf.janga.jsyms.messaging.Message;
 import cf.janga.jsyms.messaging.Messageable;
 
@@ -27,7 +25,7 @@ public class Client implements Steppable, Messageable {
     public void step() {
         if (Math.random() < requestChance_) {
             System.out.println("Client issued request...");
-            loadBalancer_.doMessage(new BaseMessage(this));
+            loadBalancer_.doMessage(new Request(this));
         }
     }
 
@@ -37,5 +35,8 @@ public class Client implements Steppable, Messageable {
 
     @Override
     public void doMessage(Message message) {
+        if (message instanceof Response) {
+            System.out.println("Received response...");
+        }
     }
 }

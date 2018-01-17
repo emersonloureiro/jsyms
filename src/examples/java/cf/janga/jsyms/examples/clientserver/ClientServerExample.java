@@ -1,6 +1,5 @@
 package cf.janga.jsyms.examples.clientserver;
 
-import cf.janga.jsyms.ext.backend.LoadBalancer;
 import cf.janga.jsyms.core.FifoQueueMessageable;
 import cf.janga.jsyms.core.*;
 
@@ -11,9 +10,9 @@ public class ClientServerExample {
 
     public static void main(String args[]) {
         FifoQueueMessageable instances[] = new FifoQueueMessageable[3];
-        instances[0] = new SimpleFifoQueueMessageable();
-        instances[1] = new SimpleFifoQueueMessageable();
-        instances[2] = new SimpleFifoQueueMessageable();
+        instances[0] = new ServiceInstance();
+        instances[1] = new ServiceInstance();
+        instances[2] = new ServiceInstance();
         LoadBalancer loadBalancer = new LoadBalancer(instances);
         Client client = new Client(0.5f, loadBalancer);
 

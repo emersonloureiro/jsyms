@@ -178,3 +178,101 @@ Philosopher 1 failed to take left fork...
 Philosopher 5 thinking...
 Philosopher 4 failed to take left fork...
 ```
+
+# Messaging
+
+I a lot - if not most - systems you'll want to simulate, you'll need to exchange messages between the different entities in your system, so the following example should illustrate how to do that in jsyms. This example will be a simple client-server simulation, where a client sends requests to a load balancer which in turns sends to one or more service instances. The full example is available on the `src/examples` folder.
+
+The communication client-load balancer and load balancer-service instance is all done via message exchange. In this case, the client will send a message to the load balancer - representing a request - which will in turn forward that message/request to one of its service instances.
+
+Let's start by showing how the service instance is implemented - code snippet below. First, our service instance class now inherits from `FifoQueueMessageable` instead of the simple `Steppable`. `FifoQueueMessageable` is in fact an implementation of `Messageable` - the basic interface for entities which can receive messages - where messages are queued in a Fifo queue for processing. The `FifoQueueMessageable` already takes care of what happens during most of the `step` phase, in this case it'll pop a message from the queue and pass it to the `processMessage` for processing, implemented by subclasses. In our case, the service is super simple and simply prints out a message to represent the request being processed and sends a response to the sender - which is included as part of the message. The response contains the source - the service instance - and the originating client.
+
+```java
+public class ServiceInstance extends FifoQueueMessageable {
+
+    @Override
+    protected void processMessage(Message message) {
+        System.out.println("Processed request " + message.getId());
+        message.getSource().doMessage(new Response(this, message.getSource()));
+    }
+}
+```
+
+The load balancer - code snippet below - just like the service instance, also extends from `FifoQueueMessageable`. The logic is a little more complicated for each message, where it redirects the message to one of the service instances when the message is a `Request`, and sends a `Response` to the originating client when it's a `Response` - in this case coming from the service instance.
+
+```java
+public class LoadBalancer extends FifoQueueMessageable {
+
+    private final Messageable instances_[];
+
+    private int currentInstance_;
+
+    public LoadBalancer(Messageable instances[]) {
+        instances_ = instances;
+    }
+
+    @Override
+    public void start() {
+        currentInstance_ = 0;
+    }
+
+    @Override
+    public void stop() {
+    }
+
+    @Override
+    protected void processMessage(Message message) {
+        if (currentInstance_ == instances_.length) {
+            currentInstance_ = 0;
+        }
+        if (message instanceof Request) {
+            instances_[currentInstance_].doMessage(message);
+            currentInstance_++;
+        } else if (message instanceof Response) {
+            Response response = (Response) message;
+            response.getClient().doMessage(new Response(this, response.getClient()));
+        }
+    }
+}
+```
+
+In terms of messaging, the client is similar, in which it has a reference to the load balancer - which is a `Messageable` - and with a given chance it will send a request message to the load balancer for processing. The main difference is that the `Client` implements the `step` phase so it can determine the logic for when to send a request. The code for setting up is in the same format as the previous example, and you can fully check it out under `src/examples/clientserver`.
+
+```java
+public class Client implements Steppable, Messageable {
+
+    private final float requestChance_;
+    private final LoadBalancer loadBalancer_;
+
+    public Client(float requestChance, LoadBalancer loadBalancer) {
+        if (requestChance > 1) {
+            throw new RuntimeException("Request chance needs to be between 0 and 1");
+        }
+        requestChance_ = requestChance;
+        loadBalancer_ = loadBalancer;
+    }
+
+    @Override
+    public void start() {
+    }
+
+    @Override
+    public void step() {
+        if (Math.random() < requestChance_) {
+            System.out.println("Client issued request...");
+            loadBalancer_.doMessage(new Request(this));
+        }
+    }
+
+    @Override
+    public void stop() {
+    }
+
+    @Override
+    public void doMessage(Message message) {
+        if (message instanceof Response) {
+            System.out.println("Received response...");
+        }
+    }
+}
+```
