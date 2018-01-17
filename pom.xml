@@ -7,7 +7,7 @@
     </parent>
     <groupId>cf.janga</groupId>
     <artifactId>jsyms</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>jsyms</name>
     <description>Systems simulation SDK</description>
@@ -29,7 +29,7 @@
         <connection>scm:git:git@github.com:emersonloureiro/jsyms.git</connection>
         <developerConnection>scm:git:git@github.com:emersonloureiro/jsyms.git</developerConnection>
         <url>git@github.com:emersonloureiro/jsyms.git</url>
-        <tag>jsyms-0.0.4</tag>
+        <tag>jsyms-0.0.3</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
