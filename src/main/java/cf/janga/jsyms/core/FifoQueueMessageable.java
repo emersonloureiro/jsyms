@@ -16,24 +16,24 @@ import java.util.Queue;
  */
 public abstract class FifoQueueMessageable implements Messageable, Steppable {
 
-    private final Queue<Message> messageQueue_;
+    private final Queue<Message> messageQueue;
 
     /**
      * creates a new <code>ServiceInstance</code>.
      */
     public FifoQueueMessageable() {
-        messageQueue_ = new LinkedList<>();
+        this.messageQueue = new LinkedList<>();
     }
 
     @Override
     public void start() {
-        messageQueue_.clear();
+        this.messageQueue.clear();
     }
 
     @Override
     public void step() {
-        if (messageQueue_.peek() != null) {
-            Message request = messageQueue_.poll();
+        if (this.messageQueue.peek() != null) {
+            Message request = this.messageQueue.poll();
             processMessage(request);
         }
     }
@@ -44,7 +44,7 @@ public abstract class FifoQueueMessageable implements Messageable, Steppable {
 
     @Override
     public final void doMessage(Message message) {
-        messageQueue_.add(message);
+        this.messageQueue.add(message);
     }
 
     /**

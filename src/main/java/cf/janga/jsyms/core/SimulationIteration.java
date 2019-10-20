@@ -6,13 +6,13 @@ package cf.janga.jsyms.core;
  */
 public class SimulationIteration {
 
-    private final int iteration_;
+    private final int iteration;
 
     public SimulationIteration(int iteration) {
-        iteration_ = iteration;
+        this.iteration = iteration;
     }
 
-    public int getIteration_() {
-        return iteration_;
+    public int getIteration() {
+        return this.iteration;
     }
 }

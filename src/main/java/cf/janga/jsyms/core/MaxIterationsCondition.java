@@ -8,7 +8,7 @@ package cf.janga.jsyms.core;
  */
 public final class MaxIterationsCondition implements FinishingCondition {
 
-    private final int numberOfIterations_;
+    private final int numberOfIterations;
 
     /**
      * Creates a new <code>MaxIterationsCondition</code>.
@@ -17,11 +17,11 @@ public final class MaxIterationsCondition implements FinishingCondition {
      *                           simulation.
      */
     public MaxIterationsCondition(int numberOfIterations) {
-        numberOfIterations_ = numberOfIterations;
+        this.numberOfIterations = numberOfIterations;
     }
 
     @Override
     public boolean isSatisfied(SimulationIteration iteration) {
-        return iteration.getIteration_() > numberOfIterations_;
+        return iteration.getIteration() > this.numberOfIterations;
     }
 }

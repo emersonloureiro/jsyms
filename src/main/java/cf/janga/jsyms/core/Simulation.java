@@ -7,15 +7,15 @@ package cf.janga.jsyms.core;
  */
 public class Simulation {
 
-    private final String description_;
+    private final String description;
 
-    private final String name_;
+    private final String name;
 
-    private final CompositeSteppable steppable_;
+    private final CompositeSteppable steppable;
 
-    private final FinishingCondition condition_;
+    private final FinishingCondition condition;
 
-    private boolean stopRequested_;
+    private volatile boolean stopRequested;
 
     /**
      * Creates a new {@code Simulation} with the provided getName and getDescription.
@@ -23,13 +23,14 @@ public class Simulation {
      * @param name        Name of this simulation.
      * @param description Description of this simulation.
      * @param steppable   Responsible for stepping all elements of the simulation
+     * @param condition   The condition determining when the simulation is finished (e.g., after a max number of iterations)
      */
     public Simulation(String name, String description, CompositeSteppable steppable, FinishingCondition condition) {
-        name_ = name;
-        description_ = description;
-        steppable_ = steppable;
-        condition_ = condition;
-        stopRequested_ = false;
+        this.name = name;
+        this.description = description;
+        this.steppable = steppable;
+        this.condition = condition;
+        this.stopRequested = false;
     }
 
     /**
@@ -38,7 +39,7 @@ public class Simulation {
      * @return String
      */
     public final String getName() {
-        return name_;
+        return this.name;
     }
 
     /**
@@ -47,30 +48,30 @@ public class Simulation {
      * @return String
      */
     public final String getDescription() {
-        return description_;
+        return this.description;
     }
 
     public final void run() {
         // Initializes the steppable of the simulation.
-        steppable_.start();
+        this.steppable.start();
         int iteration = 1;
 
-        while (!condition_.isSatisfied(new SimulationIteration(iteration)) && !stopRequested_) {
+        while (!condition.isSatisfied(new SimulationIteration(iteration)) && !this.stopRequested) {
             // ... and steps the steppable of the simulation.
-            steppable_.step();
+            this.steppable.step();
             iteration++;
         }
 
         // Signals the steppable of the simulation to stop or stop stepping its
         // internal steppables, if that's the case.
-        steppable_.stop();
-        stopRequested_ = false;
+        this.steppable.stop();
+        this.stopRequested = false;
     }
 
     /**
      * Requests the simulation to be stopped.
      */
     public final void stop() {
-        stopRequested_ = true;
+        this.stopRequested = true;
     }
 }
