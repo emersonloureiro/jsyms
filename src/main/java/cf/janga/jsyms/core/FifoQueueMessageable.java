@@ -31,7 +31,7 @@ public abstract class FifoQueueMessageable implements Messageable, Steppable {
     }
 
     @Override
-    public void step() {
+    public final void step() {
         if (this.messageQueue.peek() != null) {
             Message request = this.messageQueue.poll();
             processMessage(request);

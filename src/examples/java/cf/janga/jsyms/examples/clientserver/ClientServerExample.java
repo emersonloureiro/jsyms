@@ -1,7 +1,12 @@
 package cf.janga.jsyms.examples.clientserver;
 
+import cf.janga.jsyms.core.CompositeSteppable;
 import cf.janga.jsyms.core.FifoQueueMessageable;
-import cf.janga.jsyms.core.*;
+import cf.janga.jsyms.core.MaxIterationsCondition;
+import cf.janga.jsyms.core.ShufflingCompositeSteppable;
+import cf.janga.jsyms.core.Simulation;
+import cf.janga.jsyms.core.Steppable;
+import cf.janga.jsyms.examples.Client;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +19,7 @@ public class ClientServerExample {
         instances[1] = new ServiceInstance();
         instances[2] = new ServiceInstance();
         LoadBalancer loadBalancer = new LoadBalancer(instances);
-        Client client = new Client(0.5f, loadBalancer);
+        Client client = new Client(0.5f, loadBalancer, new RequestMessageFactory());
 
         List<Steppable> steppables = new LinkedList<>();
         steppables.add(client);

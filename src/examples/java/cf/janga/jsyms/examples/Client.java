@@ -1,20 +1,23 @@
-package cf.janga.jsyms.examples.clientserver;
+package cf.janga.jsyms.examples;
 
 import cf.janga.jsyms.core.Steppable;
+import cf.janga.jsyms.examples.clientserver.Response;
 import cf.janga.jsyms.messaging.Message;
 import cf.janga.jsyms.messaging.Messageable;
 
 public class Client implements Steppable, Messageable {
 
     private final float requestChance_;
-    private final LoadBalancer loadBalancer_;
+    private final Messageable messageable;
+    private final MessageFactory messageFactory;
 
-    public Client(float requestChance, LoadBalancer loadBalancer) {
-        if (requestChance > 1) {
+    public Client(float requestChance, Messageable messageable, MessageFactory messageFactory) {
+        if (requestChance > 1 || requestChance < 0) {
             throw new RuntimeException("Request chance needs to be between 0 and 1");
         }
         requestChance_ = requestChance;
-        loadBalancer_ = loadBalancer;
+        this.messageable = messageable;
+        this.messageFactory = messageFactory;
     }
 
     @Override
@@ -25,7 +28,7 @@ public class Client implements Steppable, Messageable {
     public void step() {
         if (Math.random() < requestChance_) {
             System.out.println("Client issued request...");
-            loadBalancer_.doMessage(new Request(this));
+            messageable.doMessage(this.messageFactory.newMessage(this));
         }
     }
 

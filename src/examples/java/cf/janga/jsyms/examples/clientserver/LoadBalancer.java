@@ -1,8 +1,6 @@
 package cf.janga.jsyms.examples.clientserver;
 
 import cf.janga.jsyms.core.FifoQueueMessageable;
-import cf.janga.jsyms.examples.clientserver.Request;
-import cf.janga.jsyms.examples.clientserver.Response;
 import cf.janga.jsyms.messaging.Message;
 import cf.janga.jsyms.messaging.Messageable;
 
@@ -30,10 +28,6 @@ public class LoadBalancer extends FifoQueueMessageable {
     @Override
     public void start() {
         currentInstance_ = 0;
-    }
-
-    @Override
-    public void stop() {
     }
 
     @Override
