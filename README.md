@@ -14,11 +14,17 @@ To get started, add the following dependency to your project, if you're using Ma
 
 Alternatively, download the latest release directly from https://github.com/emersonloureiro/jsyms/releases.
 
+There are a few examples provided with the source code. You can run them with maven using (e.g., is running the `DiningPhilosophersExample` example):
+
+```
+mvn exec:java -Dexec.mainClass="cf.janga.jsyms.examples.diningphilosophers.DiningPhilosophersExample"
+```
+
 # Basics
 
 Simulations in jsyms are based around the idea of _steps_. A step is the time each entity - e.g., a server, a database, a network node - in the system being simulated gets to do something. It's "their turn" to take an _action_. Action here is a lose term, as the semantic and granularity of the action will vary depending on the system being simulated. The imporant thing is that each entity gets a turn over an _iteration_ of the simulation, and by iterating over multiple times, we can simulate a computer system being executed, and in fact any behaviour of such systems, like race conditions in concurrent systems.
 
-# Using jsyms
+# Examples
 
 To illustrate the process of defining and running a simulation from scratch, a well-known problem in Computer Science, the Dining Philosophers problem, will be used. This example, and others, is fully available in the `src/examples` directory.
 
